@@ -1,0 +1,340 @@
+using System;
+using System.Linq;
+
+public interface IEllipsoidal
+{
+    bool IsEllipsoidal();
+}
+
+public abstract partial class Shape
+{
+    private int _color;
+
+    public static class BasicColors
+    {
+        public const int BLUE = 1;
+        public const int RED = 2;
+        public const int GREEN = 3;
+
+        public const int ARGB_BLUE = unchecked((int)0xFF0000FF);
+        public const int ARGB_RED = unchecked((int)0xFFFF0000);
+        public const int ARGB_GREEN = unchecked((int)0xFF00FF00);
+    }
+
+    public int Color
+    {
+        protected get
+        {
+            if (_color == BasicColors.ARGB_RED)
+                return BasicColors.RED;
+            if (_color == BasicColors.ARGB_GREEN)
+                return BasicColors.GREEN;
+            if (_color == BasicColors.ARGB_BLUE)
+                return BasicColors.BLUE;
+
+            return 0;
+        }
+
+        set
+        {
+            switch (value)
+            {
+                case BasicColors.BLUE:
+                    _color = BasicColors.ARGB_BLUE;
+                    break;
+                case BasicColors.RED:
+                    _color = BasicColors.ARGB_RED;
+                    break;
+                case BasicColors.GREEN:
+                    _color = BasicColors.ARGB_GREEN;
+                    break;
+                default:
+                    _color = 0x00000000;
+                    break;
+            }
+        }
+    }
+
+    public abstract double Perimeter();
+    public abstract double Area();
+
+    public virtual string GetShapeType()
+    {
+        return "Generic Shape";
+    }
+}
+
+public class Rectangle : Shape, IEllipsoidal
+{
+    public double Width { get; set; }
+    public double Height { get; set; }
+
+    public Rectangle(double width, double height)
+    {
+        Width = width;
+        Height = height;
+    }
+
+    public override double Area()
+    {
+        return Width * Height;
+    }
+
+    public override double Perimeter()
+    {
+        return 2 * (Width + Height);
+    }
+
+    public bool IsEllipsoidal()
+    {
+        return false;
+    }
+
+    public override string GetShapeType()
+    {
+        return "Rectangle";
+    }
+}
+
+public sealed class Square : Shape, IEllipsoidal
+{
+    public double Side { get; set; }
+
+    public Square(double side)
+    {
+        Side = side;
+    }
+
+    public override double Area()
+    {
+        return Side * Side;
+    }
+
+    public override double Perimeter()
+    {
+        return 4 * Side;
+    }
+
+    public bool IsEllipsoidal()
+    {
+        return false;
+    }
+
+    public sealed override string GetShapeType()
+    {
+        return "Square";
+    }
+}
+
+public class Circle : Shape, IEllipsoidal
+{
+    public double Radius { get; set; }
+
+    public Circle(double radius)
+    {
+        Radius = radius;
+    }
+
+    public override double Area()
+    {
+        return Math.PI * Radius * Radius;
+    }
+
+    public override double Perimeter()
+    {
+        return 2 * Math.PI * Radius;
+    }
+
+    public bool IsEllipsoidal()
+    {
+        return true;
+    }
+}
+
+public class Triangle<T> : Shape where T : struct, IComparable, IConvertible
+{
+    private T SideA { get; set; }
+    private T SideB { get; set; }
+    private T SideC { get; set; }
+
+    private Triangle(T a, T b, T c)
+    {
+        SideA = a;
+        SideB = b;
+        SideC = c;
+    }
+
+    public override double Perimeter()
+    {
+        double a = Convert.ToDouble(SideA);
+        double b = Convert.ToDouble(SideB);
+        double c = Convert.ToDouble(SideC);
+        return a + b + c;
+    }
+
+    public override double Area()
+    {
+        double s = Perimeter() / 2.0;
+        double a = Convert.ToDouble(SideA);
+        double b = Convert.ToDouble(SideB);
+        double c = Convert.ToDouble(SideC);
+
+        if (s * (s - a) * (s - b) * (s - c) < 0) return 0;
+
+        return Math.Sqrt(s * (s - a) * (s - b) * (s - c));
+    }
+
+    public bool IsEllipsoidal()
+    {
+        return false;
+    }
+
+    public static bool GetInstance(T a, T b, T c, out Triangle<T> triangle)
+    {
+        Type type = typeof(T);
+        bool isNumericType = (type == typeof(int) || type == typeof(float) || type == typeof(double));
+
+        if (!isNumericType)
+        {
+            triangle = null;
+            return false;
+        }
+
+        double sideA = Convert.ToDouble(a);
+        double sideB = Convert.ToDouble(b);
+        double sideC = Convert.ToDouble(c);
+
+        if (sideA + sideB > sideC && sideA + sideC > sideB && sideB + sideC > sideA)
+        {
+            triangle = new Triangle<T>(a, b, c);
+            return true;
+        }
+        else
+        {
+            triangle = null;
+            return false;
+        }
+    }
+
+    public void ScaleSides(ref T factor)
+    {
+        double f = Convert.ToDouble(factor);
+
+        SideA = (T)Convert.ChangeType(Convert.ToDouble(SideA) * f, typeof(T));
+        SideB = (T)Convert.ChangeType(Convert.ToDouble(SideB) * f, typeof(T));
+        SideC = (T)Convert.ChangeType(Convert.ToDouble(SideC) * f, typeof(T));
+    }
+}
+
+public class Program
+{
+    private static double ReadDouble(string prompt)
+    {
+        double value;
+        Console.Write(prompt);
+        while (!double.TryParse(Console.ReadLine(), out value) || value <= 0)
+        {
+            Console.Write("Невалидна стойност. Моля, въведете положително число: ");
+        }
+        return value;
+    }
+
+    private static int ReadColorInt(string prompt)
+    {
+        int value;
+        Console.Write(prompt);
+        while (!int.TryParse(Console.ReadLine(), out value) || value < 1 || value > 3)
+        {
+            Console.Write("Невалидна стойност. Въведете 1 (Син), 2 (Червен) или 3 (Зелен): ");
+        }
+        return value;
+    }
+
+    public static void Main(string[] args)
+    {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+        while (true)
+        {
+
+            Shape currentShape = null;
+
+            Console.WriteLine("Изберете фигура:");
+            Console.WriteLine("1: Квадрат");
+            Console.WriteLine("2: Правоъгълник");
+            Console.WriteLine("3: Кръг");
+            Console.WriteLine("4: Триъгълник");
+            Console.WriteLine("5: Изход");
+            Console.Write("Въведете номер: ");
+
+            string choice = Console.ReadLine();
+
+            if (choice == "5")
+            {
+                Console.WriteLine("Изход от програмата. Довиждане!");
+                break;
+            }
+
+            switch (choice)
+            {
+                case "1":
+                    double side = ReadDouble("Въведете страна на Квадрата: ");
+                    currentShape = new Square(side);
+                    break;
+                case "2":
+                    double width = ReadDouble("Въведете ширина на Правоъгълника: ");
+                    double height = ReadDouble("Въведете височина на Правоъгълника: ");
+                    currentShape = new Rectangle(width, height);
+                    break;
+                case "3":
+                    double radius = ReadDouble("Въведете радиус на Кръга: ");
+                    currentShape = new Circle(radius);
+                    break;
+                case "4":
+                    Console.WriteLine("Създаване на Триъгълник (T=int)");
+                    int tA, tB, tC;
+
+                    Console.Write("Въведете страна A (цяло число): ");
+                    while (!int.TryParse(Console.ReadLine(), out tA) || tA <= 0)
+                        Console.Write("Невалидно число. Въведете положително цяло число: ");
+
+                    Console.Write("Въведете страна B (цяло число): ");
+                    while (!int.TryParse(Console.ReadLine(), out tB) || tB <= 0)
+                        Console.Write("Невалидно число. Въведете положително цяло число: ");
+
+                    Console.Write("Въведете страна C (цяло число): ");
+                    while (!int.TryParse(Console.ReadLine(), out tC) || tC <= 0)
+                        Console.Write("Невалидно число. Въведете положително цяло число: ");
+
+                    Triangle<int> userTriangle;
+                    if (Triangle<int>.GetInstance(tA, tB, tC, out userTriangle))
+                    {
+                        currentShape = userTriangle;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nНеуспех: Въведените страни не образуват валиден триъгълник.");
+                        continue;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Невалиден избор. Моля, въведете число от 1 до 5.");
+                    continue;
+            }
+
+            Console.WriteLine("\n--- Резултати ---");
+            Console.WriteLine($"Тип: {currentShape.GetShapeType()}");
+            Console.WriteLine($"Лице: {currentShape.Area():F2}");
+            Console.WriteLine($"Периметър: {currentShape.Perimeter():F2}");
+
+            if (currentShape is IEllipsoidal ellipsoidalShape)
+            {
+                Console.WriteLine($"Елипсовидна: {ellipsoidalShape.IsEllipsoidal()}");
+            }
+
+            int colorInput = ReadColorInt("Въведете цвят (1-Син, 2-Червен, 3-Зелен) за фигурата: ");
+            currentShape.Color = colorInput;
+            Console.WriteLine($"Зададен цвят (стойност): {colorInput}");
+        }
+    }
+}
