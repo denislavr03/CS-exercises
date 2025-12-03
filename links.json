@@ -1,0 +1,142 @@
+﻿[
+  {
+    "NodeName": "instance_effect",
+    "NodeId": "no-id",
+    "ReferenceTarget": "ColorEffectR87G120B204"
+  },
+  {
+    "NodeName": "instance_effect",
+    "NodeId": "no-id",
+    "ReferenceTarget": "Material__26__Plane001_"
+  },
+  {
+    "NodeName": "instance_effect",
+    "NodeId": "no-id",
+    "ReferenceTarget": "Material__25__Box001_"
+  },
+  {
+    "NodeName": "accessor",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001-positions-array"
+  },
+  {
+    "NodeName": "accessor",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001-normals-array"
+  },
+  {
+    "NodeName": "accessor",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001-map1-array"
+  },
+  {
+    "NodeName": "accessor",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001-map2-array"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001-positions"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001-vertices"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001-normals"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001-map1"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001-map2"
+  },
+  {
+    "NodeName": "accessor",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001-positions-array"
+  },
+  {
+    "NodeName": "accessor",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001-normals-array"
+  },
+  {
+    "NodeName": "accessor",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001-map1-array"
+  },
+  {
+    "NodeName": "accessor",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001-map2-array"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001-positions"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001-vertices"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001-normals"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001-map1"
+  },
+  {
+    "NodeName": "input",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001-map2"
+  },
+  {
+    "NodeName": "instance_light",
+    "NodeId": "no-id",
+    "ReferenceTarget": "EnvironmentAmbientLight"
+  },
+  {
+    "NodeName": "instance_geometry",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Plane001"
+  },
+  {
+    "NodeName": "instance_material",
+    "NodeId": "no-id",
+    "ReferenceTarget": "Material__26__Plane001_-material"
+  },
+  {
+    "NodeName": "instance_geometry",
+    "NodeId": "no-id",
+    "ReferenceTarget": "geom-Box001"
+  },
+  {
+    "NodeName": "instance_material",
+    "NodeId": "no-id",
+    "ReferenceTarget": "Material__25__Box001_-material"
+  },
+  {
+    "NodeName": "instance_camera",
+    "NodeId": "no-id",
+    "ReferenceTarget": "PhysCamera001-camera"
+  },
+  {
+    "NodeName": "instance_visual_scene",
+    "NodeId": "no-id",
+    "ReferenceTarget": "MaxScene"
+  }
+]

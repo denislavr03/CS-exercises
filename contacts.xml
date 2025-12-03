@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPhoneEntry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<PhoneEntry>
+		<FullName>Иван</FullName>
+		<UniqueId>608310</UniqueId>
+		<PhoneNumber>+395 263 54 18</PhoneNumber>
+	</PhoneEntry>
+	<PhoneEntry>
+		<FullName>Георги</FullName>
+		<UniqueId>706038</UniqueId>
+		<PhoneNumber>+395 893 87 43</PhoneNumber>
+	</PhoneEntry>
+	<PhoneEntry>
+		<FullName>Александра</FullName>
+		<UniqueId>268742</UniqueId>
+		<PhoneNumber>+395 159 88 90</PhoneNumber>
+	</PhoneEntry>
+	<PhoneEntry>
+		<FullName>Христо</FullName>
+		<UniqueId>355175</UniqueId>
+		<PhoneNumber>+395 116 12 71</PhoneNumber>
+	</PhoneEntry>
+	<PhoneEntry>
+		<FullName>Петър</FullName>
+		<UniqueId>325168</UniqueId>
+		<PhoneNumber>+395 905 88 97</PhoneNumber>
+	</PhoneEntry>
+	<PhoneEntry>
+		<FullName>Марин</FullName>
+		<UniqueId>578028</UniqueId>
+		<PhoneNumber>+395 725 12 83</PhoneNumber>
+	</PhoneEntry>
+	<PhoneEntry>
+		<FullName>Ивана</FullName>
+		<UniqueId>636742</UniqueId>
+		<PhoneNumber>+395 768 76 55</PhoneNumber>
+	</PhoneEntry>
+	<PhoneEntry>
+		<FullName>Маргарита</FullName>
+		<UniqueId>199735</UniqueId>
+		<PhoneNumber>+395 719 16 26</PhoneNumber>
+	</PhoneEntry>
+</ArrayOfPhoneEntry>
