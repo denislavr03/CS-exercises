@@ -6,4 +6,7 @@
     - links.json
     - locations.json
     - Program.cs
+  - Упражнение 3
+    - ProgramUpr3.cs
+    - upr3csOutput.txt
      
