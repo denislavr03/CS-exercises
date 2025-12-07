@@ -9,4 +9,9 @@
   - Упражнение 3
     - ProgramUpr3.cs
     - upr3csOutput.txt
+  - Упражнение 4
+    - Program4upr.cs
+    - Participant.cs
+    - LogEntry.cs
+    - Hub.cs
      
