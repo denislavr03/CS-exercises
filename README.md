@@ -14,4 +14,6 @@
     - Participant.cs
     - LogEntry.cs
     - Hub.cs
+  - Упражнение 5
+    - upr5cs.rar
      
